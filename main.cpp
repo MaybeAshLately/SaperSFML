@@ -30,11 +30,11 @@ public:
 MinesweeperBoard::MinesweeperBoard()
 {
   width=5;
-  height=5;
+  height=3;
 
-  for(int wie=0;wie<=width-1;wie++)
+  for(int wie=0;wie<=height-1;wie++)
   {
-    for(int kol=0;kol<=height-1;kol++)
+    for(int kol=0;kol<=width-1;kol++)
     {
       board[wie][kol].hasMine=0;
       board[wie][kol].hasFlag=0;
@@ -42,14 +42,16 @@ MinesweeperBoard::MinesweeperBoard()
     }
     
   }
+
+ 
   
 }
 
 void MinesweeperBoard::debug_display() const
 {
-  for(int wie=0;wie<=width-1;wie++)
+  for(int wie=0;wie<=height-1;wie++)
   {
-    for(int kol=0;kol<=height-1;kol++)
+    for(int kol=0;kol<=width-1;kol++)
     {
       cout<<"[";
       if(board[wie][kol].hasMine==true) cout<<"M";
@@ -73,6 +75,10 @@ int main() {
   cout<<endl; 
 
   test.debug_display();
+
+  
+
+
   
 
 }
