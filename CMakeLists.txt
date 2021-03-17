@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.10)
 project (SAPER)#####################################################################
 # Tu wymień wszystkie pliki .cpp, z których składa się projekt (rozdzielone spacją)
-set ( SOURCES main.cpp )#####################################################################
+set ( SOURCES main.cpp MineB.cpp MineB.h )#####################################################################
 # Dalej na razie nic nie trzeba zmieniać
 # przy każdej kompilacji używaj:add_compile_options(-Wall -Wextra -g)
 # definicja binarki (można użyć więcej niż raz - wtedy można skompilować kilka programów jednocześnie)
