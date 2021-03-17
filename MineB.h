@@ -19,6 +19,8 @@ class MinesweeperBoard
 
   //--------------
   GameMode mode;
+  GameState stan_gry;
+  int numberOfSteps=0;
 
 public:
   MinesweeperBoard();
@@ -31,6 +33,16 @@ public:
   int getMineCount() const;
 
   int CountMines(int row,int col) const;
+
+  bool HasFlag(int row, int col) const;
+
+  void toggleFlag(int row, int col);
+
+  void revealField(int row, int col);
+
+  bool IsRevealed(int row, int col) const;
+
+  GameState getGameState() const;
 };
 
 #endif
