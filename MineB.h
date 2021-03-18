@@ -43,6 +43,8 @@ public:
   bool IsRevealed(int row, int col) const;
 
   GameState getGameState() const;
+
+  char getFieldInfo(int row, int col) const;
 };
 
 #endif

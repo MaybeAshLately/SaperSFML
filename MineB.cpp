@@ -241,6 +241,7 @@ void MinesweeperBoard::revealField(int row, int col)
   if(board[row][col].isRevealed==true) return;
   if(stan_gry!=RUNNING) return;
   if(board[row][col].hasFlag==true) return;
+
  
 
   if(board[row][col].hasMine==false) board[row][col].isRevealed=true;
@@ -288,6 +289,36 @@ bool MinesweeperBoard::IsRevealed(int row, int col) const
 //ZWRACA stan_gry
 GameState MinesweeperBoard::getGameState() const
 {
-  //DOKOŃCZYĆ
+  if(stan_gry==FINISHED_LOSS) return FINISHED_LOSS;
+  
+  for(int row=0;row<=height-1;row++)
+  {
+    for(int col=0;col<=width-1;col++)
+    {
+      if((board[row][col].isRevealed==false)&&(board[row][col].hasMine==false)) return RUNNING;
 
+    }
+    
+  }
+
+  
+  return FINISHED_WIN;
+}
+
+
+//ZWRACA INFORMACJE O POLU
+char MinesweeperBoard::getFieldInfo(int row, int col) const
+{
+  if((col>width-1)||(row>height-1)||(col<0)||(row<0)) return '#';
+
+  if((board[row][col].isRevealed==false)&&(board[row][col].hasFlag==true)) return 'F';
+
+  if((board[row][col].isRevealed==false)&&(board[row][col].hasFlag==false)) return '_';
+
+  if((board[row][col].isRevealed==true)&&(board[row][col].hasMine==true)) return 'x';
+
+  if((board[row][col].isRevealed==true)&&(CountMines(row, col)==0)) return ' ';
+  else if(CountMines(row, col)!=0) return char(CountMines(row, col));
+
+ 
 }
