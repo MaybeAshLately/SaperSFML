@@ -44,9 +44,16 @@ MinesweeperBoard::MinesweeperBoard(const int width,const  int height, const Game
 
   int number_of_fields=width*height;
   int wiersz,kolumna;
-  if(mode==EASY)
+
+
+  if(mode!=DEBUG)
   {
-    int number_of_mines=0.1*number_of_fields;
+    double przelicznik_min;
+    if(mode==EASY) przelicznik_min=0.1;
+    else if(mode==NORMAL) przelicznik_min=0.2;
+    else przelicznik_min=0.3;
+
+    int number_of_mines=przelicznik_min*number_of_fields;
     int postawione_miny=0;
 
     while(postawione_miny!=number_of_mines)
@@ -62,41 +69,7 @@ MinesweeperBoard::MinesweeperBoard(const int width,const  int height, const Game
     }
      
   }
-  else if(mode==NORMAL)
-  {
-    int number_of_mines=0.2*number_of_fields;
-    int postawione_miny=0;
-
-    while(postawione_miny!=number_of_mines)
-    {
-       kolumna=rand()%width;
-       wiersz=rand()%height;
-       if(board[wiersz][kolumna].hasMine==false)
-       {
-         board[wiersz][kolumna].hasMine=true;
-         postawione_miny++;
-       }     
-       
-    }
-  }
-  else if(mode==HARD)
-  {
-     int number_of_mines=0.3*number_of_fields;
-    int postawione_miny=0;
-
-    while(postawione_miny!=number_of_mines)
-    {
-       kolumna=rand()%width;
-       wiersz=rand()%height;
-       if(board[wiersz][kolumna].hasMine==false)
-       {
-         board[wiersz][kolumna].hasMine=true;
-         postawione_miny++;
-       }     
-       
-    }
-  }
-  else if(mode==DEBUG)
+  else
   {
      for(int wie=0;wie<=height-1;wie++)
      {
@@ -174,40 +147,69 @@ int MinesweeperBoard::getMineCount() const
   
 }
 
+bool MinesweeperBoard::czy_na_planszy(int row, int col) const
+{
+   if((col>width-1)||(row>height-1)||(col<0)||(row<0)) return 0;
+
+   return 1;
+}
 
 //SPRAWDZA ILE MIN JEST NA SĄSIEDNICH POLACH
 int MinesweeperBoard::CountMines(int row,int col) const
 {
+  if(czy_na_planszy(row,col)==false) return -1;
   if(board[row][col].isRevealed==false) return -1;
-  
-  if(getFieldInfo(row,col)=='#') return -1; 
+ 
 
   int countOfMines=0;
 
-   //NA GÓRZE
-  if(row-1>=0)
+  //NA GÓRZE
+  if(czy_na_planszy(row-1,col)==true)
   {
     if(board[row-1][col].hasMine==true) countOfMines++;
   }
-  
+
+  //GÓRA- SKOS- LEWO
+  if(czy_na_planszy(row-1,col-1)==true)
+  {
+    if(board[row-1][col-1].hasMine==true) countOfMines++;
+  }
+
+  //GÓRA- SKOS- PRAWO
+  if(czy_na_planszy(row-1,col+1)==true)
+  {
+    if(board[row-1][col+1].hasMine==true) countOfMines++;
+  }
 
 
   //NA DOLE
-  if(row+1<=height-1)
+  if(czy_na_planszy(row+1,col)==true)
   {
     if(board[row+1][col].hasMine==true) countOfMines++;
   }
   
-  
+
+  //DÓŁ- SKOS- LEWO
+  if(czy_na_planszy(row+1,col-1)==true)
+  {
+    if(board[row+1][col-1].hasMine==true) countOfMines++;
+  }
+
+  //DÓŁ- SKOS- PRAWO
+  if(czy_na_planszy(row+1,col+1)==true)
+  {
+    if(board[row+1][col+1].hasMine==true) countOfMines++;
+  }
+
   //NA PRAWO
-  if(col+1<=width-1)
+  if(czy_na_planszy(row,col+1)==true)
   {
     if(board[row][col+1].hasMine==true) countOfMines++;
   }
   
   
   //NA LEWO
-  if(col-1>=0)
+  if(czy_na_planszy(row,col-1)==true)
   {
     if(board[row][col-1].hasMine==true) countOfMines++;
   }
@@ -219,10 +221,10 @@ int MinesweeperBoard::CountMines(int row,int col) const
 //SPRAWDZA CZY JEST FLAGA
 bool MinesweeperBoard::HasFlag(int row, int col) const
 {
+  if(czy_na_planszy(row,col)==false) return -1;
+   
   
-  if(getFieldInfo(row,col)=='#') return false; 
-  
-  if(getFieldInfo(row, col)=='F') return true; //true jeśli jest zakryte i ma flagę
+  if(board[row][col].hasFlag==true) return true; 
 
   return false;
 
@@ -233,7 +235,7 @@ bool MinesweeperBoard::HasFlag(int row, int col) const
 void MinesweeperBoard::toggleFlag(int row, int col)
 {
  
-  if(getFieldInfo(row,col)=='#') return; 
+  if(czy_na_planszy(row,col)==false) return;
   if(board[row][col].isRevealed==true) return;
   if(stan_gry!=RUNNING) return;
 
@@ -243,7 +245,7 @@ void MinesweeperBoard::toggleFlag(int row, int col)
 //ODSŁANIA POLE
 void MinesweeperBoard::revealField(int row, int col)
 {
-  if(getFieldInfo(row,col)=='#') return; 
+  if(czy_na_planszy(row,col)==false) return; 
   if(board[row][col].isRevealed==true) return;
   if(stan_gry!=RUNNING) return;
   if(board[row][col].hasFlag==true) return;
@@ -293,7 +295,7 @@ void MinesweeperBoard::revealField(int row, int col)
 bool MinesweeperBoard::IsRevealed(int row, int col) const
 {
   
-  if(getFieldInfo(row,col)=='#') return false; 
+  if(czy_na_planszy(row,col)==false) return false;
 
   if(board[row][col].isRevealed==false) return false;
   return true;

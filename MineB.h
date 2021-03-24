@@ -21,6 +21,7 @@ class MinesweeperBoard
   GameMode mode;
   GameState stan_gry;
   int numberOfSteps=0;
+  bool czy_na_planszy(int row, int col) const;
 
 public:
   MinesweeperBoard();

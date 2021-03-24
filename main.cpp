@@ -10,25 +10,46 @@ void intro()
   cout<<endl;
 }
 
+void testowanie()
+{
+  MinesweeperBoard test(10,10,DEBUG);
+  test.debug_display();
+  cout<<"szerokość: "<<test.getBoardWidth()<<endl;
+  cout<<"wysokość: "<<test.getBoardHeight()<<endl;
+  cout<<"Liczba min: "<<test.getMineCount()<<endl; 
+
+  //Sprawdza czy jest flaga
+  cout<<"czy flaga "<<test.HasFlag(1, 2)<<endl;
+  //Sprawdza czy jest odkryte
+  cout<<"czy odkryte "<<test.IsRevealed(2, 2)<<endl;
+
+  //odkryj pole
+  test.revealField(1, 2);
+  //zatknij flagę 
+  test.toggleFlag(2, 2);
+  
+  //Miny na sąsiednich polach
+  cout<<"Miny na sąsiednich "<<test.CountMines(1, 2)<<endl;
+
+  //zwraca stan gry
+  cout<<"stan gry: "<<test.getGameState()<<endl;
+
+  
+
+  
+
+}
+
 int main() {
   intro();
   srand(time(0));
   
-  MinesweeperBoard test(10,10,DEBUG);
   
   cout<<endl;
   cout<<endl; 
 
-  test.debug_display();
+  testowanie();
 
-  //cout<<test.getBoardWidth()<<endl;
-  //cout<<test.getBoardHeight()<<endl;
-  //cout<<test.getMineCount()<<endl;
-  //cout<<test.CountMines(1, 0)<<endl;
-  //cout<<test.CountMines(2, 9)<<endl;
-  //cout<<test.CountMines(2, 1)<<endl;
-  //cout<<test.CountMines(6, 7)<<endl;
- //test.toggleFlag(-1, -5);
   
 
   
