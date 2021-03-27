@@ -48,4 +48,17 @@ public:
   char getFieldInfo(int row, int col) const;
 };
 
+class MSBoardTextView
+{
+MinesweeperBoard  board_test; 
+
+public:
+MSBoardTextView();
+MSBoardTextView(MinesweeperBoard & board);
+
+void display() const;
+
+};
+
+
 #endif

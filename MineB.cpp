@@ -337,3 +337,72 @@ char MinesweeperBoard::getFieldInfo(int row, int col) const
 
  
 }
+
+
+MSBoardTextView::MSBoardTextView()
+{
+  
+}
+
+
+//KONSTRUKTOR KLASY WYŚWIETLAJĄCEJ PLANSZĘ 
+MSBoardTextView::MSBoardTextView(MinesweeperBoard & board):board_test(board)
+{
+
+  board_test=board;
+  
+}
+
+
+//WYŚWIETLA PLANSZĘ DLA GRACZA
+void MSBoardTextView::display() const
+{
+  
+  int width=board_test.getBoardWidth();
+  int height=board_test.getBoardHeight();
+
+
+  
+for(int wie=0;wie<=height-1;wie++)
+  {
+    for(int kol=0;kol<=width-1;kol++)
+    {
+      std::cout<<"[";
+     if((board_test.IsRevealed(wie,kol)==false)&&(board_test.HasFlag(wie,kol)==false))
+     {
+       std::cout<<".";
+     }
+     else if(board_test.HasFlag(wie,kol)==true)
+     {
+       std::cout<<"F";
+     }
+     else if(board_test.IsRevealed(wie,kol)==true)
+     {
+       std::cout<<board_test.CountMines(wie,kol);
+     }
+      std::cout<<"]";
+    }
+    std::cout<<std::endl;
+  }
+  
+
+  /*
+  for(int wie=0;wie<=board_test.height-1;wie++)
+  {
+    for(int kol=0;kol<=width-1;kol++)
+    {
+      std::cout<<"[";
+      if(board_test[wie][kol].hasMine==true) std::cout<<"M";
+      else std::cout<<".";
+      if(board_test[wie][kol].isRevealed==true) std::cout<<"o";
+      else std::cout<<".";
+      if(board_test[wie][kol].hasFlag==true ) std::cout<<"f";
+      else std::cout<<".";
+      std::cout<<"] ";
+    }
+    std::cout<<std::endl;
+    
+  }
+  */
+  
+}

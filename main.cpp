@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MineB.h"
 
+
 using namespace std;
 
 void intro()
@@ -48,7 +49,17 @@ int main() {
   cout<<endl;
   cout<<endl; 
 
-  testowanie();
+ // testowanie();
+
+ MinesweeperBoard board(20,10,GameMode::EASY);
+ MSBoardTextView view (board);
+ view.display();
+ cout<<endl;
+
+ board.revealField(0, 5);
+
+ view.display();
+
 
   
 
