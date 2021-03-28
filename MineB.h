@@ -11,6 +11,8 @@ struct Field
 	bool isRevealed;
 };
 
+
+
 class MinesweeperBoard
 {
   Field board[100][100];    // 100-elementowa tablica, 100-elementowych tablic typu Field 
@@ -22,6 +24,8 @@ class MinesweeperBoard
   GameState stan_gry;
   int numberOfSteps=0;
   bool czy_na_planszy(int row, int col) const;
+
+  
 
 public:
   MinesweeperBoard();
@@ -48,12 +52,19 @@ public:
   char getFieldInfo(int row, int col) const;
 };
 
+
+
+
+
+
+
 class MSBoardTextView
 {
-MinesweeperBoard  board_test; 
-
+MinesweeperBoard &board_text; 
+int width;
+int height;
 public:
-MSBoardTextView();
+
 MSBoardTextView(MinesweeperBoard & board);
 
 void display() const;

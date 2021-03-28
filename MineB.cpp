@@ -333,76 +333,46 @@ char MinesweeperBoard::getFieldInfo(int row, int col) const
   if((board[row][col].isRevealed==true)&&(board[row][col].hasMine==true)) return 'x';
 
   if((board[row][col].isRevealed==true)&&(CountMines(row, col)==0)) return ' ';
-  else if(CountMines(row, col)!=0) return char(CountMines(row, col));
+  else return static_cast<char>(CountMines(row, col));
+
 
  
 }
 
 
-MSBoardTextView::MSBoardTextView()
-{
-  
-}
 
 
 //KONSTRUKTOR KLASY WYŚWIETLAJĄCEJ PLANSZĘ 
-MSBoardTextView::MSBoardTextView(MinesweeperBoard & board):board_test(board)
+MSBoardTextView::MSBoardTextView(MinesweeperBoard & board): board_text(board) 
 {
-
-  board_test=board;
-  
+  height=board_text.getBoardHeight();
+  width=board_text.getBoardWidth();
 }
 
 
 //WYŚWIETLA PLANSZĘ DLA GRACZA
 void MSBoardTextView::display() const
 {
-  
-  int width=board_test.getBoardWidth();
-  int height=board_test.getBoardHeight();
-
-
+  std::cout<<std::endl;
   
 for(int wie=0;wie<=height-1;wie++)
   {
     for(int kol=0;kol<=width-1;kol++)
     {
       std::cout<<"[";
-     if((board_test.IsRevealed(wie,kol)==false)&&(board_test.HasFlag(wie,kol)==false))
-     {
-       std::cout<<".";
-     }
-     else if(board_test.HasFlag(wie,kol)==true)
-     {
-       std::cout<<"F";
-     }
-     else if(board_test.IsRevealed(wie,kol)==true)
-     {
-       std::cout<<board_test.CountMines(wie,kol);
-     }
+ 
+      if(board_text.getFieldInfo(wie, kol)=='F') std::cout<<"F";
+      else if(board_text.getFieldInfo(wie, kol)=='_') std::cout<<".";
+      else if(board_text.getFieldInfo(wie, kol)=='x') std::cout<<"M";
+      else std::cout<<board_text.CountMines(wie, kol);
+   
       std::cout<<"]";
     }
     std::cout<<std::endl;
   }
-  
 
-  /*
-  for(int wie=0;wie<=board_test.height-1;wie++)
-  {
-    for(int kol=0;kol<=width-1;kol++)
-    {
-      std::cout<<"[";
-      if(board_test[wie][kol].hasMine==true) std::cout<<"M";
-      else std::cout<<".";
-      if(board_test[wie][kol].isRevealed==true) std::cout<<"o";
-      else std::cout<<".";
-      if(board_test[wie][kol].hasFlag==true ) std::cout<<"f";
-      else std::cout<<".";
-      std::cout<<"] ";
-    }
-    std::cout<<std::endl;
-    
-  }
-  */
+  if(board_text.getGameState()==FINISHED_WIN) std::cout<<"WYGRAŁEŚ/AŚ!"<<std::endl;
+  else if(board_text.getGameState()==FINISHED_LOSS) std::cout<<"PRZEGRAŁEŚ/AŚ!"<<std::endl;
   
+  std::cout<<std::endl;
 }

@@ -41,6 +41,16 @@ void testowanie()
 
 }
 
+void display_test()
+{
+  MinesweeperBoard board(20,10,GameMode::EASY);
+ MSBoardTextView view (board);
+ view.display();
+ board.revealField(0,5);
+ view.display();
+
+}
+
 int main() {
   intro();
   srand(time(0));
@@ -51,17 +61,9 @@ int main() {
 
  // testowanie();
 
- MinesweeperBoard board(20,10,GameMode::EASY);
- MSBoardTextView view (board);
- view.display();
- cout<<endl;
+ display_test();
 
- board.revealField(0, 5);
-
- view.display();
-
-
-  
+ 
 
   
 
