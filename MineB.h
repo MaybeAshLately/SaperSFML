@@ -29,7 +29,7 @@ class MinesweeperBoard
 
 public:
   MinesweeperBoard();
-  MinesweeperBoard(int width, int height, GameMode mode);
+  explicit MinesweeperBoard(int width, int height, GameMode mode);
 
   void debug_display() const;
 
@@ -65,7 +65,7 @@ int width;
 int height;
 public:
 
-MSBoardTextView(MinesweeperBoard & board);
+explicit MSBoardTextView(MinesweeperBoard & board);
 
 void display() const;
 

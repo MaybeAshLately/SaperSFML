@@ -11,13 +11,13 @@ MinesweeperBoard::MinesweeperBoard()
   height=3;
   stan_gry=RUNNING;
 
-  for(int wie=0;wie<=height-1;wie++)
+  for(int row=0;row<=height-1;row++)
   {
-    for(int kol=0;kol<=width-1;kol++)
+    for(int col=0;col<=width-1;col++)
     {
-      board[wie][kol].hasMine=0;
-      board[wie][kol].hasFlag=0;
-      board[wie][kol].isRevealed=0;
+      board[row][col].hasMine=0;
+      board[row][col].hasFlag=0;
+      board[row][col].isRevealed=0;
     }
     
   }
@@ -31,13 +31,13 @@ MinesweeperBoard::MinesweeperBoard()
 MinesweeperBoard::MinesweeperBoard(const int width,const  int height, const GameMode mode):width(width),height(height),mode(mode)
 {
   stan_gry=RUNNING;
-  for(int wie=0;wie<=height-1;wie++)
+  for(int row=0;row<=height-1;row++)
   {
-    for(int kol=0;kol<=width-1;kol++)
+    for(int col=0;col<=width-1;col++)
     {
-      board[wie][kol].hasMine=0;
-      board[wie][kol].hasFlag=0;
-      board[wie][kol].isRevealed=0;
+      board[row][col].hasMine=0;
+      board[row][col].hasFlag=0;
+      board[row][col].isRevealed=0;
     }
     
   }
@@ -71,13 +71,13 @@ MinesweeperBoard::MinesweeperBoard(const int width,const  int height, const Game
   }
   else
   {
-     for(int wie=0;wie<=height-1;wie++)
+     for(int row=0;row<=height-1;row++)
      {
-        for(int kol=0;kol<=width-1;kol++)
+        for(int col=0;col<=width-1;col++)
          {
-           if(((wie==0)||(wie==kol)||(kol==0 && wie%2==0)))
+           if(((row==0)||(row==col)||(col==0 && row%2==0)))
            {
-             board[wie][kol].hasMine=true;
+             board[row][col].hasMine=true;
            }
          }
     
@@ -89,16 +89,16 @@ MinesweeperBoard::MinesweeperBoard(const int width,const  int height, const Game
 //WYŚWIETLA PLANSZĘ (WSZYSTKO WIDOCZNE)
 void MinesweeperBoard::debug_display() const
 {
-  for(int wie=0;wie<=height-1;wie++)
+  for(int row=0;row<=height-1;row++)
   {
-    for(int kol=0;kol<=width-1;kol++)
+    for(int col=0;col<=width-1;col++)
     {
       std::cout<<"[";
-      if(board[wie][kol].hasMine==true) std::cout<<"M";
+      if(board[row][col].hasMine==true) std::cout<<"M";
       else std::cout<<".";
-      if(board[wie][kol].isRevealed==true) std::cout<<"o";
+      if(board[row][col].isRevealed==true) std::cout<<"o";
       else std::cout<<".";
-      if(board[wie][kol].hasFlag==true ) std::cout<<"f";
+      if(board[row][col].hasFlag==true ) std::cout<<"f";
       else std::cout<<".";
       std::cout<<"] ";
     }
@@ -355,16 +355,16 @@ void MSBoardTextView::display() const
 {
   std::cout<<std::endl;
   
-for(int wie=0;wie<=height-1;wie++)
+for(int row=0;row<=height-1;row++)
   {
-    for(int kol=0;kol<=width-1;kol++)
+    for(int col=0;col<=width-1;col++)
     {
       std::cout<<"[";
  
-      if(board_text.getFieldInfo(wie, kol)=='F') std::cout<<"F";
-      else if(board_text.getFieldInfo(wie, kol)=='_') std::cout<<".";
-      else if(board_text.getFieldInfo(wie, kol)=='x') std::cout<<"M";
-      else std::cout<<board_text.CountMines(wie, kol);
+      if(board_text.getFieldInfo(row, col)=='F') std::cout<<"F";
+      else if(board_text.getFieldInfo(row, col)=='_') std::cout<<".";
+      else if(board_text.getFieldInfo(row, col)=='x') std::cout<<"M";
+      else std::cout<<board_text.CountMines(row, col);
    
       std::cout<<"]";
     }
