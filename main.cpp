@@ -1,5 +1,7 @@
 #include <iostream>
 #include "MineB.h"
+#include "Mine_text.h"
+#include "Mine_ctrl.h"
 
 
 using namespace std;
@@ -61,7 +63,14 @@ int main() {
 
  // testowanie();
 
- display_test();
+ //display_test();
+
+ //MinesweeperBoard board (20,10, GameMode::EASY);
+ MinesweeperBoard board (5,5, GameMode::EASY);
+ MSBoardTextView view (board);
+ MSTextController ctrl (board,view);
+
+ ctrl.play();
 
  
 

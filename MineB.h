@@ -1,6 +1,8 @@
 #ifndef ABCDEFGH
 #define ABCDEFGH
 
+
+
 enum GameMode  { DEBUG, EASY, NORMAL, HARD };
 enum GameState { RUNNING, FINISHED_WIN, FINISHED_LOSS };
 
@@ -15,7 +17,7 @@ struct Field
 
 class MinesweeperBoard
 {
-  Field board[100][100];    // 100-elementowa tablica, 100-elementowych tablic typu Field 
+  Field board[100][100];    // 100-elementowa tablica, 100-elementowych tablic typu Field
   int width;                // rzeczywista szerokość planszy
   int height;               // rzeczywista wysokość planszy
 
@@ -50,25 +52,6 @@ public:
   GameState getGameState() const;
 
   char getFieldInfo(int row, int col) const;
-};
-
-
-
-
-
-
-
-class MSBoardTextView
-{
-MinesweeperBoard &board_text; 
-int width;
-int height;
-public:
-
-explicit MSBoardTextView(MinesweeperBoard & board);
-
-void display() const;
-
 };
 
 
