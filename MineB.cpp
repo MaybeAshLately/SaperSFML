@@ -230,7 +230,7 @@ bool MinesweeperBoard::HasFlag(int row, int col) const
 }
 
 
-//ZATYKA FLAGĘ
+//ZATYKA FLAGĘ LUB USUWA
 void MinesweeperBoard::toggleFlag(int row, int col)
 {
  
@@ -238,7 +238,9 @@ void MinesweeperBoard::toggleFlag(int row, int col)
   if(board[row][col].isRevealed==true) return;
   if(stan_gry!=RUNNING) return;
 
-  board[row][col].hasFlag=true;
+  if(board[row][col].hasFlag==true) board[row][col].hasFlag=false;
+  else board[row][col].hasFlag=true;
+  
 }
 
 //ODSŁANIA POLE
