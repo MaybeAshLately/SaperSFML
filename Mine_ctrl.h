@@ -1,5 +1,6 @@
 #ifndef ABCD
 #define ABCD
+#include "Array2D.h"
 
 class MSTextController
 {

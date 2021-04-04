@@ -2,6 +2,7 @@
 #include "MineB.h"
 #include "Mine_text.h"
 #include "Mine_ctrl.h"
+#include "Array2D.h"
 
 //KONSTRUKTOR KLASY KONTROLERA 
 MSTextController::MSTextController(MinesweeperBoard &board,MSBoardTextView &board_text): board(board), board_text(board_text)
@@ -17,6 +18,8 @@ void MSTextController::reveal_field()
   int wiersz, kolumna;
       std::cout<<"Które pole chcesz odsłonić? Podaj w formacie wiersz,enter, kolumna (pamiętaj że numeracja jest od zera!)"<<std::endl;
       std::cin>>wiersz>>kolumna;
+
+
 
       if(board.getFieldInfo(wiersz,kolumna)=='#') std::cout<<"WSKAZANE POLE NIE ISTNIEJE!"<<std::endl;
       else if(board.HasFlag(wiersz, kolumna)) std::cout<<"Na wskazanym polu jest Flaga!"<<std::endl;

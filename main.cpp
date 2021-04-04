@@ -2,6 +2,8 @@
 #include "MineB.h"
 #include "Mine_text.h"
 #include "Mine_ctrl.h"
+#include "Array2D.h"
+
 
 
 using namespace std;
@@ -69,6 +71,7 @@ int main() {
  MinesweeperBoard board (5,5, GameMode::EASY);
  MSBoardTextView view (board);
  MSTextController ctrl (board,view);
+ 
 
  ctrl.play();
 

@@ -2,6 +2,8 @@
 #include "MineB.h"
 #include "Mine_text.h"
 #include "Mine_ctrl.h"
+#include "Array2D.h"
+
 
 //KONSTRUKTOR KLASY WYŚWIETLAJĄCEJ PLANSZĘ 
 MSBoardTextView::MSBoardTextView(MinesweeperBoard & board): board_text(board) 

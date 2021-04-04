@@ -2,6 +2,8 @@
 #include "MineB.h"
 #include "Mine_text.h"
 #include "Mine_ctrl.h"
+#include "Array2D.h"
+
 
 
 MinesweeperBoard::MinesweeperBoard() 
@@ -9,6 +11,7 @@ MinesweeperBoard::MinesweeperBoard()
   width=5;
   height=3;
   stan_gry=RUNNING;
+  
 
   for(int row=0;row<=height-1;row++)
   {

@@ -1,7 +1,7 @@
 #ifndef ABCDEFGH
 #define ABCDEFGH
 
-
+#include "Array2D.h"
 
 enum GameMode  { DEBUG, EASY, NORMAL, HARD };
 enum GameState { RUNNING, FINISHED_WIN, FINISHED_LOSS };
@@ -17,7 +17,12 @@ struct Field
 
 class MinesweeperBoard
 {
+  /*
   Field board[100][100];    // 100-elementowa tablica, 100-elementowych tablic typu Field
+  */
+  Array2D<Field> board {100, 100};
+  
+  
   int width;                // rzeczywista szerokość planszy
   int height;               // rzeczywista wysokość planszy
 

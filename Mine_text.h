@@ -1,5 +1,6 @@
 #ifndef ABC
 #define ABC
+#include "Array2D.h"
 
 class MSBoardTextView
 {
