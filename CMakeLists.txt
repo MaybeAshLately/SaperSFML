@@ -5,7 +5,7 @@ project (SAPER)
 #####################################################################
 # Tu wymień wszystkie pliki .cpp, z których składa się projekt (rozdzielone spacją)
 
-set ( SOURCES main.cpp  )
+set ( SOURCES main.cpp MineB.cpp Mine_text.cpp Mine_ctrl.cpp MSSFMLView.cpp )
 
 #####################################################################
 

@@ -1,34 +1,10 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
 
-// to powinno być w osobnych plikach !
-
-class MinesweeperBoard
-{
-
-};
-
-class MSSFMLView
-{
-	MinesweeperBoard & board;
-public:
-	explicit MSSFMLView(MinesweeperBoard & b);
-
-	void draw (sf::RenderWindow & win);
-};
-
-MSSFMLView::MSSFMLView(MinesweeperBoard & b) : board(b) {}
-
-void MSSFMLView::draw (sf::RenderWindow & win)
-{
-	// tu robimy rysowanie planszy na podstawie zawartości "board"
-	
-	sf::RectangleShape r;
-	r.setSize ( sf::Vector2f(10, 10) ) ;
-	r.setFillColor ( sf::Color::Red );
-	r.setPosition(100,100);
-	win.draw(r);
-}
+#include "MineB.h"
+#include "Mine_text.h"
+#include "Mine_ctrl.h"
+#include "MSSFMLView.h"
 
 
 int main()
