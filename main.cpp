@@ -13,8 +13,10 @@ int main()
     window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(1);
 
-    MinesweeperBoard board;
+    MinesweeperBoard board(7,4,DEBUG);
 	MSSFMLView view(board);
+
+  
 
     while (window.isOpen())
     {
@@ -28,6 +30,8 @@ int main()
         window.clear();
         view.draw(window);
         window.display();
+
+       
     }
 
   return 0;

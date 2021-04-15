@@ -22,6 +22,8 @@ void MSSFMLView::draw (sf::RenderWindow & win)
   int height,width;
   height=board.getBoardHeight();
   width=board.getBoardWidth();
+  
+  //DEFINIOWANIE OPTYMALNEGO ROZMIARU POLA W ZALEŻNOŚCI OD WYMIARÓW UTWORZONEJ PLANSZY
   int size_of_field;
   if(height>=width) size_of_field=600/height-10;
   else size_of_field=800/width-10;
@@ -35,10 +37,20 @@ void MSSFMLView::draw (sf::RenderWindow & win)
 	    r.setFillColor ( sf::Color::Blue );
 	    r.setPosition(0+col*(800/width),0+row*(600/height));
 
-      //teraz warunek sprawdzający czy jest flaga--> zmienić żeby wyświetlało flagę  
-      //warunek sprawdzający czy jest odkryte--> sprawdzić czy mina jeśli tak wyświetlić minę, jeśli nie ilość min dookoła  
       
-	    win.draw(r);
+      if(board.getFieldInfo(row,col)=='F')
+      {
+        r.setFillColor (sf::Color::Yellow);
+      }
+      else if(board.getFieldInfo(row,col)=='x')
+      {
+        r.setFillColor (sf::Color::Red);
+      }
+      
+
+     
+      win.draw(r);
+	    
     }
     
   }
