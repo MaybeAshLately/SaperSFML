@@ -13,6 +13,13 @@ class MSSFMLView
 {
 	MinesweeperBoard & board;
 
+  int size_of_field;
+  int height,width;
+  sf::RectangleShape r;
+
+  sf::Font font1;
+  sf::Text txt1;
+  
   
 
 public:
