@@ -5,7 +5,7 @@
 #include "Mine_text.h"
 #include "Mine_ctrl.h"
 #include "MSSFMLView.h"
-
+#include "Events.h"
 
 
 
@@ -18,9 +18,9 @@ int main()
 
     MinesweeperBoard board(7,4,DEBUG);
 	MSSFMLView view(board);
+  Events view_control(view,board);
 
-  board.toggleFlag(1,1);
-  board.revealField(1,2);
+  
 
     while (window.isOpen())
     {
@@ -32,17 +32,7 @@ int main()
                {
                 //Prawy-0-odkrycie pola
                 //lewy-1-obsługa flag
-                if(event.mouseButton.button==0)
-                {
-                  //kliknięto prawym
-                  //ustalić współrzędne 
-                  //sprawdzić czy leżą w jakimś polu
-                  //jeśli tak odkryć je 
-                  int x=event.mouseButton.x;
-                  int y=event.mouseButton.y;
-                  //SPRÓBOWAĆ UTWORZYĆ KLASĘ DO OBSŁUGI EVENTÓW (TAK JAK NA WYKŁADZIE)
-                
-                }
+               view_control.mouse_button(event);
                }
         }
         
