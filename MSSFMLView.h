@@ -9,6 +9,21 @@
 #include "Mine_ctrl.h"
 #include "Array2D.h"
 
+
+struct Flag
+{
+   sf::RectangleShape base;
+   sf::RectangleShape stick;
+   sf::CircleShape triangle;
+};
+
+struct Bomb
+{
+   sf::CircleShape circle;
+   sf::RectangleShape rectangle;
+   sf::RectangleShape fuse;
+};
+
 class MSSFMLView
 {
 	MinesweeperBoard & board;
@@ -20,7 +35,11 @@ class MSSFMLView
   sf::Font font1;
   sf::Text txt1;
   
-  
+  Flag flag_icon;
+  void locate_flag(sf::Vector2f pozycja,Flag & flag_icon);
+
+  Bomb bomb_icon;
+  void locate_bomb(sf::Vector2f pozycja,Bomb & bomb_icon);
 
 public:
 	explicit MSSFMLView(MinesweeperBoard & b);
