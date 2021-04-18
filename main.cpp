@@ -10,8 +10,7 @@
 
 
 //DO ZROBIENIA
-//3 WE WŁAŚCIWEJ KLASIE DODAĆ WIDOK PRZEGRANEJ I WYGRANEJ
-//7. CODE REVIEW, PRZEJRZEĆ FUNKCJE
+//7.  PRZEJRZEĆ FUNKCJE, POPRAWKI
 
 
 int main()
@@ -76,7 +75,7 @@ Events view_control(view,board);
                }
         }
         
-        window.clear();
+        window.clear(sf::Color(115,220,10));
         view.draw(window);
         window.display();
       

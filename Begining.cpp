@@ -79,9 +79,11 @@ void Begining::display_of_hello_mode(sf::RenderWindow & win)
     start.setSize(sf::Vector2f(400,100));
     start.setPosition(200,250);
     start.setFillColor(sf::Color(220,59,10));
+    start.setOutlineThickness(1);
+    start.setOutlineColor(sf::Color::Black);
 
     txt1.setString("START");
-    txt1.setPosition(220,230);
+    txt1.setPosition(240,230);
     txt1.setCharacterSize(100);
 
     win.draw(background);
@@ -239,7 +241,9 @@ void Begining::display_of_choice_mode_mode(sf::RenderWindow & win)
     sf::RectangleShape icon1,icon2,icon3;
 
     icon1.setSize(sf::Vector2f(150,80));
-   icon1.setFillColor(sf::Color::Blue);
+    icon1.setFillColor(sf::Color::Blue);
+    icon1.setOutlineThickness(1);
+    icon1.setOutlineColor(sf::Color::Black);
    icon2=icon1;
    icon3=icon1;
 
@@ -300,6 +304,8 @@ void Begining::display_of_choice_board(sf::RenderWindow & win)
   ready.setSize(sf::Vector2f(260,50));
   ready.setFillColor(sf::Color::Red);
   ready.setPosition(sf::Vector2f(280,265));
+  ready.setOutlineThickness(1);
+  ready.setOutlineColor(sf::Color::Black);
 
   
   
@@ -357,7 +363,7 @@ void Begining::display_of_choice_board(sf::RenderWindow & win)
 
   
 txt1.setString("GOTOWE");
-txt1.setPosition(285,265);
+txt1.setPosition(285,260);
 txt1.setCharacterSize(50);
 txt1.setFillColor(sf::Color::Black);
   win.draw(ready);
@@ -414,9 +420,11 @@ void Begining::display_of_instructions(sf::RenderWindow & win)
   agree.setSize(sf::Vector2f(200,50));
   agree.setPosition(300,100);
   agree.setFillColor(sf::Color::Red);
-  txt1.setCharacterSize(20);
-  txt1.setPosition(315,115);
-  txt1.setString("ZROZUMIALEM");
+  agree.setOutlineThickness(1);
+  agree.setOutlineColor(sf::Color::Black);
+  txt1.setCharacterSize(25);
+  txt1.setPosition(325,110);
+  txt1.setString("ROZUMIEM");
   win.draw(agree);
   win.draw(txt1);
   txt1.setFillColor(sf::Color::Black);
@@ -425,7 +433,7 @@ void Begining::display_of_instructions(sf::RenderWindow & win)
   txt1.setString("1. ABY ODKRYC POLE UZYJ PRAWEGO PRZYCISKU MYSZKI");
   win.draw(txt1);
   txt1.setPosition(115,240);
-  txt1.setString("2. UMIESCIC/USUNAC FLAGE UZYJ LEWEGO PRZYCISKU MYSZKI");
+  txt1.setString("2. ABY UMIESCIC/USUNAC FLAGE UZYJ LEWEGO PRZYCISKU MYSZKI");
   win.draw(txt1);
   txt1.setPosition(115,265);
   txt1.setString("3. NA ODKRYTYM POLU WYSWIETLI SIE ILOSC MIN NA SASIEDNICH POLACH");

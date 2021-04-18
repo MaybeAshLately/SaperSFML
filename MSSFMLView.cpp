@@ -73,21 +73,12 @@ MSSFMLView::MSSFMLView(MinesweeperBoard & b) : board(b)
 
 }
 
+
+
 void MSSFMLView::draw (sf::RenderWindow & win)
 {
 	
-
-    display_of_game_mode(win);
- 
-	  
-}
-
-
-//WYŚWIETLANIE PLANSZY W TRYBIE GRY
-//-----------------------------------
-void MSSFMLView::display_of_game_mode(sf::RenderWindow & win)
-{
-   for(int row=0;row<=height-1;row++)
+  for(int row=0;row<=height-1;row++)
   {
     for(int col=0;col<=width-1;col++)
     {
@@ -95,6 +86,9 @@ void MSSFMLView::display_of_game_mode(sf::RenderWindow & win)
 	    r.setSize ( sf::Vector2f(size_of_field,size_of_field) ) ;
 	    r.setFillColor ( sf::Color::Blue );
 	    r.setPosition(0+col*(800/width),0+row*(600/height));
+      r.setOutlineThickness(1);
+      r.setOutlineColor(sf::Color::Black);
+      
 
       
       if(board.getFieldInfo(row,col)=='F')
@@ -141,22 +135,62 @@ void MSSFMLView::display_of_game_mode(sf::RenderWindow & win)
     }
     
   }
+
+  
+  if(board.getGameState()!=RUNNING)
+  {
+    if(board.getGameState()==FINISHED_LOSS) mode=LOST;
+    else mode=WIN;
+
+    if(mode==LOST)
+    {
+      display_of_lost(win);
+    }
+    else if(mode==WIN)
+    {
+      display_of_win(win);
+    }
+  }
+  
+
+  //GameState test;
+  //test=board.getGameState();
+ 
+	  
 }
 
 
 
+//FUNKCJA WYŚWIETLAJĄCA INFORMACJĘ O PRZEGRANEJ
+void MSSFMLView::display_of_lost(sf::RenderWindow & win)
+{
+   r.setSize(sf::Vector2f(350,100));
+   r.setPosition(225,150);
+   r.setFillColor(sf::Color(255,119,0));
+   
+   txt1.setString("PRZEGRANA");
+   txt1.setCharacterSize(50);
+   txt1.setPosition(230,160);
+
+   win.draw(r);
+   win.draw(txt1);
+}
 
 
+//FUNKCJA WYŚWIETLAJĄCA INFORMACJĘ O ZWYCIĘSTWIE
+void MSSFMLView::display_of_win(sf::RenderWindow & win)
+{
+   r.setSize(sf::Vector2f(350,100));
+   r.setPosition(225,150);
+   r.setFillColor(sf::Color(255,119,0));
+   
+   txt1.setString("WYGRANA");
+   txt1.setCharacterSize(50);
+   txt1.setPosition(240,160);
 
-
-
-
-
-
-
-
-
-
+   win.draw(r);
+   win.draw(txt1);
+}
 
 
 

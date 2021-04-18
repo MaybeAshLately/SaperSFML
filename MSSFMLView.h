@@ -45,7 +45,9 @@ class MSSFMLView
   View_mode mode;
 
 
-  void display_of_game_mode(sf::RenderWindow & win);
+  //void display_of_game_mode(sf::RenderWindow & win);
+  void display_of_lost(sf::RenderWindow & win);
+  void display_of_win(sf::RenderWindow & win);
 
  
 
