@@ -62,7 +62,7 @@ void Events::right_button(sf::Event event)
 
 
 //FUNKCJA POMOCNICZA SPRAWDZAJĄCA CZY KLIKNIĘTE WSPÓŁRZĘDNE ZNAJDUJĄ SIĘ NA JAKIMŚ POLU
-bool Events::is_pressed_on_field(sf::Event event,int & pressed_row,int & pressed_col)
+bool Events::is_pressed_on_field(sf::Event event,int & pressed_row,int & pressed_col) const
 {
     int x=event.mouseButton.x;
     int y=event.mouseButton.y;

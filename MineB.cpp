@@ -30,7 +30,7 @@ MinesweeperBoard::MinesweeperBoard()
 
 
 //GENERUJE POLE DO GRY Z ODPOWIEDNIĄ ILOŚCIĄ MIN W ZALEŻNOŚCI OD WPROWADZONEGO POZIOMU
-MinesweeperBoard::MinesweeperBoard(const int width,const  int height, const GameMode mode):width(width),height(height),mode(mode)
+MinesweeperBoard::MinesweeperBoard(const int height,const  int width, const GameMode mode):width(width),height(height),mode(mode)
 {
   stan_gry=RUNNING;
   for(int row=0;row<=height-1;row++)

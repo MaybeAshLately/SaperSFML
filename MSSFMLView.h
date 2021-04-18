@@ -9,6 +9,7 @@
 #include "Mine_ctrl.h"
 #include "Array2D.h"
 
+enum View_mode {GAME, LOST, WIN};
 
 struct Flag
 {
@@ -40,6 +41,13 @@ class MSSFMLView
 
   Bomb bomb_icon;
   void locate_bomb(sf::Vector2f pozycja,Bomb & bomb_icon);
+
+  View_mode mode;
+
+
+  void display_of_game_mode(sf::RenderWindow & win);
+
+ 
 
 public:
 	explicit MSSFMLView(MinesweeperBoard & b);

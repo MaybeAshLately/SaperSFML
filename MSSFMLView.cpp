@@ -15,7 +15,7 @@
 
 MSSFMLView::MSSFMLView(MinesweeperBoard & b) : board(b) 
 {
-
+  mode=GAME;
   height=board.getBoardHeight();
   width=board.getBoardWidth();
 
@@ -75,10 +75,19 @@ MSSFMLView::MSSFMLView(MinesweeperBoard & b) : board(b)
 
 void MSSFMLView::draw (sf::RenderWindow & win)
 {
-	// tu robimy rysowanie planszy na podstawie zawartości "board"
 	
-  
-  for(int row=0;row<=height-1;row++)
+
+    display_of_game_mode(win);
+ 
+	  
+}
+
+
+//WYŚWIETLANIE PLANSZY W TRYBIE GRY
+//-----------------------------------
+void MSSFMLView::display_of_game_mode(sf::RenderWindow & win)
+{
+   for(int row=0;row<=height-1;row++)
   {
     for(int col=0;col<=width-1;col++)
     {
@@ -132,11 +141,26 @@ void MSSFMLView::draw (sf::RenderWindow & win)
     }
     
   }
-
-
-  
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//FUNKCJA USTAWIAJĄCA LOKALIZACJĘ IKONKI FLAGI
 void MSSFMLView::locate_flag(sf::Vector2f pozycja,Flag & flag_icon)
 {
    flag_icon.base.setPosition(pozycja.x+size_of_field/4,pozycja.y+size_of_field*0.7);
@@ -144,7 +168,7 @@ void MSSFMLView::locate_flag(sf::Vector2f pozycja,Flag & flag_icon)
    flag_icon.triangle.setPosition(pozycja.x+size_of_field*0.7+size_of_field/10,pozycja.y+size_of_field*0.3);
 }
 
-
+//FUNKCJA USTAWIAJĄCA LOKALIZACJĘ IKONKI BOMBY
 void MSSFMLView::locate_bomb(sf::Vector2f pozycja,Bomb & bomb_icon)
 {
   bomb_icon.circle.setPosition(pozycja.x+size_of_field/4,pozycja.y+size_of_field/4);
