@@ -10,20 +10,18 @@
 
 
 //DO ZROBIENIA
-//1. Wyświetlić wybrane wymiary (wyświetlić napisy nad kolumnami)
-//2. WYŚWIETLENIE SAMOUCZKA, zamknięcie samouczka= zamknięcie okna
 //3 WE WŁAŚCIWEJ KLASIE DODAĆ WIDOK PRZEGRANEJ I WYGRANEJ
 //7. CODE REVIEW, PRZEJRZEĆ FUNKCJE
 
-//OPCJONALINE- BOMBY NA EKRANIE POWITALNYM
+
 int main()
 {
   
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Saper gra");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Saper");
     window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(1);
 
-  sf::RenderWindow window_hello(sf::VideoMode(800, 600), "Saper wprowadzenie");
+  sf::RenderWindow window_hello(sf::VideoMode(800, 600), "Saper");
   window_hello.setVerticalSyncEnabled(false);
   window_hello.setFramerateLimit(1);
 

@@ -64,7 +64,8 @@ void Begining::draw(sf::RenderWindow & win)
   }
   else if(app_state==INSTRUCTIONS)
   {
-    win.close();
+    display_of_instructions(win);
+    if(end) win.close();
   }
 }
 
@@ -100,13 +101,24 @@ void Begining::mouse_button_pressed(sf::Event event)
   {
     choice_level(event);
   }
-  else if(app_state=CHOICE_OF_BOARD)
+  else if(app_state==CHOICE_OF_BOARD)
   {
     choice_board(event);
+  }
+  else  //app_state==INSTRUCTIONS
+  {
+     instructions_agree(event);
   }
   
 }
 
+//SPRAWDZA CZY GRACZ KLIKNĄŁ W "ZROZUMIAŁEM"
+void Begining::instructions_agree(sf::Event event)
+{
+   int x=event.mouseButton.x;
+   int y=event.mouseButton.y;
+   if((x>=300)and(x<=500)and(y>=100)and(y<=150)) end=true;
+}
 
 //FUNKCJA SPRAWDZAJĄCA CZY GRACZ KLIKNĄŁ W PRZYCISK "START"
 void Begining::start_game(sf::Event event)
@@ -152,6 +164,11 @@ void Begining::choice_board(sf::Event event)
   int y=event.mouseButton.y;
 
   if((x>=280)and(x<=540)and(y>=265)and(y<=315)) ready_was_pressed();
+  else if((x>=400)and(x<=450)and(y>=200)and(y<=220))
+  {
+    help_col=0;
+    help_row=0;
+  }
   else
   {
     was_pressed_number(event); 
@@ -163,10 +180,7 @@ void Begining::choice_board(sf::Event event)
 //FUNKCJA WYWOŁYWANA PO KLIKNIĘCIU "GOTOWE"
 void Begining::ready_was_pressed()
 {
-  //PO PRZERWIE SPRAWDZIĆ CZY ILOŚĆ WIERSZY I KOLUMN W NORMIE 
-  //TAK-> WYŚWIETLIĆ, ZAPISAĆ DO ZMIENNYCH, ZMIENIĆ TRYB GRY 
-  //NIE-> WYZEROWAĆ ZMIENNE POMOCNICZE
-  std::cout<<"WYBRANE WIERSZE "<<help_row<<" Wybrane kolumny "<<help_col<<std::endl;
+  
   if((help_col>0)and(help_col<=100)and(help_row>0)and(help_row<=100))
   {
     choosed_col=help_col;
@@ -177,6 +191,7 @@ void Begining::ready_was_pressed()
   {
     help_col=0;
     help_row=0;
+    error=true;
     
   }
 }
@@ -272,11 +287,11 @@ void Begining::display_of_choice_board(sf::RenderWindow & win)
   txt2.setCharacterSize(25);
 
   txt3.setString("WIERSZE:");
-  txt3.setPosition(150,100);
+  txt3.setPosition(100,100);
   txt3.setCharacterSize(15);
 
   txt4.setString("KOLUMNY:");
-  txt4.setPosition(550,100);
+  txt4.setPosition(600,100);
   txt4.setCharacterSize(15);
 
   sf::RectangleShape field_row,field_col,ready;
@@ -344,10 +359,87 @@ void Begining::display_of_choice_board(sf::RenderWindow & win)
 txt1.setString("GOTOWE");
 txt1.setPosition(285,265);
 txt1.setCharacterSize(50);
+txt1.setFillColor(sf::Color::Black);
   win.draw(ready);
   win.draw(txt1);
-  
+
+  txt1.setString(std::to_string(help_row));
+  txt1.setCharacterSize(10);
+  txt1.setPosition(290,205);
+  field.setPosition(280,200);
+  win.draw(field);
+  win.draw(txt1);
+
+  txt1.setString(std::to_string(help_col));
+  txt1.setPosition(500,205);
+  field.setPosition(490,200);
+  win.draw(field);
+  win.draw(txt1);
+
+  txt1.setFillColor(sf::Color::White);
+  txt1.setString("WYBRANE WIERSZE:");
+  txt1.setCharacterSize(10);
+  txt1.setPosition(260,180);
+  win.draw(txt1);
+  txt1.setString("WYBRANE KOLUMNY:");
+  txt1.setPosition(470,180);
+  win.draw(txt1);
+
+
+  field.setPosition(400,200);
+  win.draw(field);
+  txt1.setFillColor(sf::Color::Black);
+   txt1.setString("WYCZYSC");
+  txt1.setCharacterSize(8);
+  txt1.setPosition(403,205);
+  win.draw(txt1);
+ txt1.setFillColor(sf::Color::White);
+  if(error)
+  {
+    ready.setPosition(280,380);
+    txt2.setString("NIEPRAWIDLOWE DANE");
+    txt2.setCharacterSize(18);
+    txt2.setPosition(285,385);
+    error=false;
+    win.draw(ready);
+    win.draw(txt2);
+  }
 }
+
+//FUNKCJA WYŚWIETLAJĄCA INSTRUKCJE 
+void Begining::display_of_instructions(sf::RenderWindow & win)
+{
+  win.draw(background);
+  sf::RectangleShape agree;
+  agree.setSize(sf::Vector2f(200,50));
+  agree.setPosition(300,100);
+  agree.setFillColor(sf::Color::Red);
+  txt1.setCharacterSize(20);
+  txt1.setPosition(315,115);
+  txt1.setString("ZROZUMIALEM");
+  win.draw(agree);
+  win.draw(txt1);
+  txt1.setFillColor(sf::Color::Black);
+  txt1.setCharacterSize(15);
+  txt1.setPosition(115,215);
+  txt1.setString("1. ABY ODKRYC POLE UZYJ PRAWEGO PRZYCISKU MYSZKI");
+  win.draw(txt1);
+  txt1.setPosition(115,240);
+  txt1.setString("2. UMIESCIC/USUNAC FLAGE UZYJ LEWEGO PRZYCISKU MYSZKI");
+  win.draw(txt1);
+  txt1.setPosition(115,265);
+  txt1.setString("3. NA ODKRYTYM POLU WYSWIETLI SIE ILOSC MIN NA SASIEDNICH POLACH");
+  win.draw(txt1);
+  txt1.setPosition(115,290);
+  txt1.setString("4. PRZEGRASZ JESLI ODSLONISZ POLE Z MINA");
+  win.draw(txt1);
+  txt1.setPosition(115,315);
+  txt1.setString("5. WYGRASZ JESLI ODSLONISZ WSZYSTKIE POLA BEZ MIN");
+  win.draw(txt1);
+  txt1.setFillColor(sf::Color::White);
+}
+
+
 
 //FUNKCJE ZWRACJĄCE USTALONE INFORMACJE
 

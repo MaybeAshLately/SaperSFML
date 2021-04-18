@@ -17,6 +17,7 @@ class Begining
   void display_of_hello_mode(sf::RenderWindow & win);
   void display_of_choice_mode_mode(sf::RenderWindow & win);
   void display_of_choice_board(sf::RenderWindow & win);
+  void display_of_instructions(sf::RenderWindow & win);
 
   sf::Font font1;
   sf::Text txt1,txt2,txt3,txt4;
@@ -31,7 +32,8 @@ class Begining
   sf::Text number;
 
   int help_row=0,help_col=0;
-
+  bool error=false;
+  bool end=false;
   public:
 
   Begining();
@@ -41,6 +43,7 @@ class Begining
   void choice_level(sf::Event event);
   void choice_board(sf::Event event);
   void ready_was_pressed(sf::Event event);
+  void instructions_agree(sf::Event event);
 
   GameMode get_mode() const;
   int get_row_number() const;
