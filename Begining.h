@@ -22,7 +22,6 @@ class Begining
   sf::Font font1;
   sf::Text txt1,txt2,txt3,txt4;
 
-  sf::RectangleShape background;
 
   int choosed_row;
   int choosed_col;

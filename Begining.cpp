@@ -31,9 +31,7 @@ Begining::Begining()
   txt3.setFont(font1);
   txt4.setFont(font1);
 
-  background.setSize(sf::Vector2f(800,600));
-  background.setPosition(0,0);
-  background.setFillColor(sf::Color(115,220,10));
+  
 
 
 field.setSize(sf::Vector2f(50,20));
@@ -86,7 +84,7 @@ void Begining::display_of_hello_mode(sf::RenderWindow & win)
     txt1.setPosition(240,230);
     txt1.setCharacterSize(100);
 
-    win.draw(background);
+    
     win.draw(start);
     win.draw(txt1);
 }
@@ -267,7 +265,7 @@ void Begining::display_of_choice_mode_mode(sf::RenderWindow & win)
     txt4.setCharacterSize(25);
 
 
-    win.draw(background);
+    
     
     win.draw(txt1);
         
@@ -310,7 +308,7 @@ void Begining::display_of_choice_board(sf::RenderWindow & win)
   
   
 
-  win.draw(background);
+  
   win.draw(txt1);
   win.draw(txt2);
   win.draw(txt3);
@@ -415,7 +413,6 @@ txt1.setFillColor(sf::Color::Black);
 //FUNKCJA WYŚWIETLAJĄCA INSTRUKCJE 
 void Begining::display_of_instructions(sf::RenderWindow & win)
 {
-  win.draw(background);
   sf::RectangleShape agree;
   agree.setSize(sf::Vector2f(200,50));
   agree.setPosition(300,100);

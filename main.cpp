@@ -44,7 +44,7 @@ GameMode mode=DEBUG;
             
         }
         
-        window_hello.clear();
+        window_hello.clear(sf::Color(115,220,10));
         saper_introduction.draw(window_hello);
         window_hello.display();    
     }
