@@ -19,17 +19,17 @@ class Events
   int size_of_field;
   
   void funkcja();
+
+  void left_button(sf::Event event);
+  void right_button(sf::Event event);
+ 
+  bool is_pressed_on_field(sf::Event event,int & pressed_row,int & pressed_col) const;
   
   public:
   explicit Events(MSSFMLView & view,MinesweeperBoard & board);
 
   void mouse_button(sf::Event event);
   
-  
-  void left_button(sf::Event event);
-  void right_button(sf::Event event);
- 
-  bool is_pressed_on_field(sf::Event event,int & pressed_row,int & pressed_col) const;
 
 };
 
