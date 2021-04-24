@@ -18,7 +18,7 @@ class Events
   int width;
   int size_of_field;
   
-  void funkcja();
+  
 
   void left_button(sf::Event event);
   void right_button(sf::Event event);

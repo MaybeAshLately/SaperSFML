@@ -1,12 +1,12 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
-
 #include "MineB.h"
 #include "Mine_text.h"
 #include "Mine_ctrl.h"
 #include "MSSFMLView.h"
 #include "Events.h"
 
+//KONSTRUKTOR
 Events::Events(MSSFMLView & view, MinesweeperBoard & board) : view_control(view), board_control(board)
 {
    height=board_control.getBoardHeight();
@@ -17,18 +17,16 @@ Events::Events(MSSFMLView & view, MinesweeperBoard & board) : view_control(view)
   else size_of_field=800/width-10;
 }
 
-
+//PRZEKAZYWANIE STEROWANIA DO ODPOWIEDNIEJ FUNKCJI W ZALEŻNOŚCI OD NACIŚNIĘTEGO PRZYCISKU
 void Events::mouse_button(sf::Event event)
 {
-   
-   //LEWY
    if(event.mouseButton.button==0)
    {
-     left_button(event);
+     left_button(event);//lewy
    }
    else if(event.mouseButton.button==1)
    {
-     right_button(event);
+     right_button(event);//prawy
    }
 }
 
@@ -70,8 +68,6 @@ bool Events::is_pressed_on_field(sf::Event event,int & pressed_row,int & pressed
   bool is_field_horizontal=false;
   bool is_field_vertical=false;
 
- 
-
   for(int row=0;row<=height-1;row++)
   {
     int position=0+row*(600/height);
@@ -79,20 +75,16 @@ bool Events::is_pressed_on_field(sf::Event event,int & pressed_row,int & pressed
     {
       is_field_vertical=true;
       pressed_row=row;
-      
     }
-    
   }
 
   for(int col=0;col<=width-1;col++)
-  {
-     
+  { 
     int position=0+col*(800/width);
     if(x>=(position)and(x<=position+size_of_field))
     {
       is_field_horizontal=true;
       pressed_col=col;
-      
     }
   }
 
@@ -100,6 +92,5 @@ bool Events::is_pressed_on_field(sf::Event event,int & pressed_row,int & pressed
   {
     return true;
   }
-
   return false;
 }

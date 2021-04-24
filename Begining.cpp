@@ -31,15 +31,10 @@ Begining::Begining()
   txt3.setFont(font1);
   txt4.setFont(font1);
 
-  
-
-
 field.setSize(sf::Vector2f(50,20));
 field.setFillColor(sf::Color::White);
 field.setOutlineThickness(1);
 field.setOutlineColor(sf::Color::Black);
-
-
 }
 
 //--------------------
@@ -89,7 +84,7 @@ void Begining::display_of_hello_mode(sf::RenderWindow & win)
 //Wyświetlanie trybu wyboryu poziomu gry
 void Begining::display_of_choice_mode_mode(sf::RenderWindow & win)
 {
-    sf::RectangleShape icon1,icon2,icon3;
+    sf::RectangleShape icon1,icon2,icon3,icon4;
 
     icon1.setSize(sf::Vector2f(150,80));
     icon1.setFillColor(sf::Color::Blue);
@@ -122,6 +117,21 @@ void Begining::display_of_choice_mode_mode(sf::RenderWindow & win)
     win.draw(txt2);
     win.draw(txt3);
     win.draw(txt4);
+
+
+    icon4.setSize(sf::Vector2f(80,28));
+    icon4.setFillColor(sf::Color(39,203,209));
+    icon4.setOutlineThickness(1);
+    icon4.setOutlineColor(sf::Color::Black);
+    icon4.setPosition(95,495);
+
+    txt1.setString("DEBUG");
+    txt1.setPosition(110,498);
+    txt1.setCharacterSize(15);
+    
+    win.draw(icon4);
+    win.draw(txt1);
+
 }
 
 
@@ -131,9 +141,7 @@ void Begining::display_of_choice_board(sf::RenderWindow & win)
   txt1.setString("WYBIERZ ROZMIAR PLANSZY");
   txt1.setPosition(80,10);
   txt1.setCharacterSize(40);
-  txt2.setString("MAX 100 X 100");
-  txt2.setPosition(350,60);
-  txt2.setCharacterSize(25);
+ 
 
   txt3.setString("WIERSZE:");
   txt3.setPosition(100,100);
@@ -152,7 +160,6 @@ void Begining::display_of_choice_board(sf::RenderWindow & win)
   ready.setOutlineColor(sf::Color::Black);
 
   win.draw(txt1);
-  win.draw(txt2);
   win.draw(txt3);
   win.draw(txt4);
   
@@ -198,10 +205,10 @@ void Begining::display_of_choice_board(sf::RenderWindow & win)
   txt1.setString("GOTOWE");
   txt1.setPosition(285,260);
   txt1.setCharacterSize(50);
-  txt1.setFillColor(sf::Color::Black);
+  txt1.setFillColor(sf::Color::White);
   win.draw(ready);
   win.draw(txt1);
-  txt1.setFillColor(sf::Color::White);
+ 
 
   if(error)
   {
@@ -226,7 +233,17 @@ void Begining::display_of_instructions(sf::RenderWindow & win)
   agree.setFillColor(sf::Color::Red);
   agree.setOutlineThickness(1);
   agree.setOutlineColor(sf::Color::Black);
+
+  sf::RectangleShape instr;
+  instr.setSize(sf::Vector2f(670,140));
+  instr.setPosition(110,210);
+  instr.setFillColor(sf::Color::Transparent);
+  instr.setOutlineThickness(1);
+  instr.setOutlineColor(sf::Color::Black);
+  win.draw(instr);
+
   txt1.setCharacterSize(25);
+  txt1.setFillColor(sf::Color::White);
   txt1.setPosition(325,110);
   txt1.setString("ROZUMIEM");
   win.draw(agree);
@@ -234,10 +251,10 @@ void Begining::display_of_instructions(sf::RenderWindow & win)
   txt1.setFillColor(sf::Color::Black);
   txt1.setCharacterSize(15);
   txt1.setPosition(115,215);
-  txt1.setString("1. ABY ODKRYC POLE UZYJ PRAWEGO PRZYCISKU MYSZKI");
+  txt1.setString("1. ABY ODKRYC POLE UZYJ LEWEGO PRZYCISKU MYSZKI");
   win.draw(txt1);
   txt1.setPosition(115,240);
-  txt1.setString("2. ABY UMIESCIC/USUNAC FLAGE UZYJ LEWEGO PRZYCISKU MYSZKI");
+  txt1.setString("2. ABY UMIESCIC/USUNAC FLAGE UZYJ PRAWEGO PRZYCISKU MYSZKI");
   win.draw(txt1);
   txt1.setPosition(115,265);
   txt1.setString("3. NA ODKRYTYM POLU WYSWIETLI SIE ILOSC MIN NA SASIEDNICH POLACH");
@@ -279,7 +296,7 @@ void Begining::mouse_button_pressed(sf::Event event)
   
 }
 
-//Sprawdzanie czy grcz kliknął w "start"
+//Sprawdzanie czy gracz kliknął w "start"
 void Begining::start_game(sf::Event event)
 {
    int x=event.mouseButton.x;
@@ -307,6 +324,11 @@ void Begining::choice_level(sf::Event event)
   else if((x>=500)and(x<=650)and(y>=250)and(y<=330)) 
   {
     choosed_mode=HARD;
+    app_state=CHOICE_OF_BOARD;
+  }
+  else if((x>=95)and(x<=175)and(y>=495)and(y<=523))
+  {
+    choosed_mode=DEBUG;
     app_state=CHOICE_OF_BOARD;
   }
   

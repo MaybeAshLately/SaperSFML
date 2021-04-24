@@ -1,18 +1,15 @@
 #include "MSSFMLView.h"
-
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
-
 #include "MineB.h"
 #include "Mine_text.h"
 #include "Mine_ctrl.h"
-
 #include <vector>
 #include <cerrno>
 #include <cstring>
 
 
-
+//KONSTRUKTOR
 MSSFMLView::MSSFMLView(MinesweeperBoard & b) : board(b) 
 {
   mode=GAME;
@@ -39,7 +36,7 @@ MSSFMLView::MSSFMLView(MinesweeperBoard & b) : board(b)
   txt1.setFont(font1);
   
 
-  //UTWORZENIE IKONKI FLAGI O ODPOWIEDNICH WYMIARACH W ZALEŻNOŚCI OD WYMIARÓW PÓL
+    //utworzenie ikonki flagi o wymiarach zależnych od wymiarów pola
  flag_icon.base.setSize(sf::Vector2f(size_of_field/2,size_of_field/10));
  flag_icon.base.setFillColor(sf::Color(159,96,0));
 
@@ -54,6 +51,7 @@ MSSFMLView::MSSFMLView(MinesweeperBoard & b) : board(b)
  flag_icon.triangle.setOutlineColor(sf::Color::Black);
 
 
+  //utworzenie ikonki bomby o wymiarach zależnych od wymiarów pola
  bomb_icon.circle.setRadius(size_of_field/4);
  bomb_icon.circle.setFillColor(sf::Color::Black);
 
@@ -67,56 +65,35 @@ MSSFMLView::MSSFMLView(MinesweeperBoard & b) : board(b)
  bomb_icon.fuse.setOutlineThickness(1);
  bomb_icon.fuse.setOutlineColor(sf::Color::Black);
 
- 
-
-  
 
 }
 
 
 
-void MSSFMLView::draw (sf::RenderWindow & win)
+//FUNKCJA SPRAWDZAJĄCA CZY POLE JEST "SPECJALNE"(ma flagę, bombę, liczbę) I RYSUJĄCA ODPOWIEDNIE IKONKI
+void MSSFMLView::draw_of_fields(int row, int col, sf::RenderWindow & win)
 {
-	
-  for(int row=0;row<=height-1;row++)
-  {
-    for(int col=0;col<=width-1;col++)
-    {
-      
-	    r.setSize ( sf::Vector2f(size_of_field,size_of_field) ) ;
-	    r.setFillColor ( sf::Color::Blue );
-	    r.setPosition(0+col*(800/width),0+row*(600/height));
-      r.setOutlineThickness(1);
-      r.setOutlineColor(sf::Color::Black);
-      
-
-      
-      if(board.getFieldInfo(row,col)=='F')
-      {
-        r.setFillColor (sf::Color::Yellow);
-        sf::Vector2f pozycja=r.getPosition();
-        locate_flag(pozycja,flag_icon);
-      }
-      else if(board.getFieldInfo(row,col)=='x')
-      {
-        r.setFillColor (sf::Color::Red);
-         sf::Vector2f pozycja=r.getPosition();
-        locate_bomb(pozycja,bomb_icon);
-      }
-      else if((board.getFieldInfo(row,col)!='x')and(board.IsRevealed(row,col)==true))
-      {
-        
-        
+       if(board.getFieldInfo(row,col)=='F')
+         {
+          r.setFillColor (sf::Color::Yellow);
+          sf::Vector2f pozycja=r.getPosition();
+          locate_flag(pozycja,flag_icon);
+         }
+       else if(board.getFieldInfo(row,col)=='x')
+         {
+          r.setFillColor (sf::Color::Red);
+          sf::Vector2f pozycja=r.getPosition();
+          locate_bomb(pozycja,bomb_icon);
+         }
+       else if((board.getFieldInfo(row,col)!='x')and(board.IsRevealed(row,col)==true))
+         {      
         r.setFillColor( sf::Color::Green );
         txt1.setString(std::to_string(board.CountMines(row,col)));
         txt1.setPosition(0+col*(800/width)+size_of_field/4,0+row*(600/height)-size_of_field/5);
-        txt1.setCharacterSize(size_of_field);
-        
-      }
-      
-
-     
-      win.draw(r);
+        txt1.setCharacterSize(size_of_field);       
+         }
+    
+     win.draw(r);
      win.draw(txt1);
      if(board.getFieldInfo(row,col)=='F')
      {
@@ -131,12 +108,29 @@ void MSSFMLView::draw (sf::RenderWindow & win)
       win.draw(bomb_icon.rectangle);
       win.draw(bomb_icon.fuse);
      }
-     
+}
+
+
+//FUNKCJA RYSUJĄCA GRĘ
+void MSSFMLView::draw (sf::RenderWindow & win)
+{
+	
+  for(int row=0;row<=height-1;row++)
+  {
+    for(int col=0;col<=width-1;col++)
+    {
+	    r.setSize ( sf::Vector2f(size_of_field,size_of_field) ) ;
+	    r.setPosition(0+col*(800/width),0+row*(600/height));
+      r.setOutlineThickness(1);
+      r.setOutlineColor(sf::Color::Black);
+      r.setFillColor ( sf::Color::Blue );
+      
+      draw_of_fields(row,col,win);
     }
     
   }
 
-  
+   //przekazanie sterowania do funkcji wyświetlającej wygraną/przegraną
   if(board.getGameState()!=RUNNING)
   {
     if(board.getGameState()==FINISHED_LOSS) mode=LOST;
@@ -151,11 +145,6 @@ void MSSFMLView::draw (sf::RenderWindow & win)
       display_of_win(win);
     }
   }
-  
-
-  //GameState test;
-  //test=board.getGameState();
- 
 	  
 }
 
@@ -203,7 +192,7 @@ void MSSFMLView::locate_flag(sf::Vector2f pozycja,Flag & flag_icon)
 }
 
 //FUNKCJA USTAWIAJĄCA LOKALIZACJĘ IKONKI BOMBY
-void MSSFMLView::locate_bomb(sf::Vector2f pozycja,Bomb & bomb_icon)
+void MSSFMLView::locate_bomb(sf::Vector2f pozycja,Bomb & bomb_icon) 
 {
   bomb_icon.circle.setPosition(pozycja.x+size_of_field/4,pozycja.y+size_of_field/4);
   bomb_icon.rectangle.setPosition(pozycja.x+size_of_field*0.7,pozycja.y+size_of_field*0.25);

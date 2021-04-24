@@ -32,7 +32,6 @@ class MSSFMLView
   int size_of_field;
   int height,width;
   sf::RectangleShape r;
-
   sf::Font font1;
   sf::Text txt1;
   
@@ -44,12 +43,10 @@ class MSSFMLView
 
   View_mode mode;
 
-
-  //void display_of_game_mode(sf::RenderWindow & win);
   void display_of_lost(sf::RenderWindow & win);
   void display_of_win(sf::RenderWindow & win);
 
- 
+ void draw_of_fields(int row, int col, sf::RenderWindow & win);
 
 public:
 	explicit MSSFMLView(MinesweeperBoard & b);

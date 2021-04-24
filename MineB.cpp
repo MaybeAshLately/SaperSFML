@@ -308,6 +308,7 @@ bool MinesweeperBoard::IsRevealed(int row, int col) const
 //ZWRACA stan_gry
 GameState MinesweeperBoard::getGameState() const
 {
+  bool is_any_field_revealed=0;
   if(stan_gry==FINISHED_LOSS) return FINISHED_LOSS;
   
   for(int row=0;row<=height-1;row++)
@@ -315,12 +316,14 @@ GameState MinesweeperBoard::getGameState() const
     for(int col=0;col<=width-1;col++)
     {
       if((board[row][col].isRevealed==false)&&(board[row][col].hasMine==false)) return RUNNING;
+       if(board[row][col].isRevealed==true) is_any_field_revealed=1; 
 
     }
     
   }
 
-  
+if(is_any_field_revealed==false) return RUNNING;
+   
   return FINISHED_WIN;
 }
 

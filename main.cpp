@@ -7,7 +7,6 @@
 #include "Events.h"
 #include "Begining.h"
 
-//przejrzeć wszystkie funkcje; dodać opcje cofania w Begining; dodać opcję debug
 
 int main()
 {  
@@ -15,19 +14,22 @@ sf::RenderWindow window(sf::VideoMode(800, 600), "Saper");
 window.setVerticalSyncEnabled(false);
 window.setFramerateLimit(1);
 
-  sf::RenderWindow window_hello(sf::VideoMode(800, 600), "Saper");
-  window_hello.setVerticalSyncEnabled(false);
-  window_hello.setFramerateLimit(1);
+sf::RenderWindow window_hello(sf::VideoMode(800, 600), "Saper");
+window_hello.setVerticalSyncEnabled(false);
+window_hello.setFramerateLimit(1);
+
 
  Begining saper_introduction;
  while (window_hello.isOpen())
     {
-    
-     
         sf::Event event;
         while (window_hello.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)  window_hello.close();
+            if (event.type == sf::Event::Closed)
+            {
+              window_hello.close();
+              window.close();
+            }  
             else if(event.type == sf::Event::MouseButtonPressed)
                {
                  saper_introduction.mouse_button_pressed(event);
