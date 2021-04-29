@@ -56,6 +56,7 @@ MinesweeperBoard::MinesweeperBoard(const int height,const  int width, const Game
     else przelicznik_min=0.3;
 
     int number_of_mines=przelicznik_min*number_of_fields;
+    if(number_of_mines==0) number_of_mines=1;
     int postawione_miny=0;
 
     while(postawione_miny!=number_of_mines)
